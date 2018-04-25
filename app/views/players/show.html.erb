@@ -1,0 +1,30 @@
+<%- model_class = Player -%>
+  <h1><%=t '.title', default: @player.name + " " + @player.surname %></h1>
+
+<div class="fieldset">
+<div style="text-align: center;"><%= image_tag(@player.picture_url, width:200) if @player.picture.present? %></div>
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @player.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:surname) %></dt>
+      <dd><pre class="prettyprint"><%= @player.surname %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:born) %></dt>
+      <dd><pre class="prettyprint"><%= @player.born %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:country) %></dt>
+      <dd><pre class="prettyprint"><%= @player.country_name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:position) %></dt>
+      <dd><pre class="prettyprint"><%= @player.position %></pre></dd>
+  </dl>
+</div>
+
+<div class="form-group">
+  <%= link_to t('.back', default: t("helpers.links.back")),
+              players_path, class: 'btn btn-default'  %>
+  <%= link_to t('.edit', default: t("helpers.links.edit")),
+              edit_player_path(@player), class: 'btn btn-default' %>
+  <%= link_to t('.destroy', default: t("helpers.links.destroy")),
+              player_path(@player),
+              method: 'delete',
+              data: { confirm: "Are you sure?" },
+              class: 'btn btn-danger' %>
+</div>

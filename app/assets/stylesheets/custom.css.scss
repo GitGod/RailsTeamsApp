@@ -1,0 +1,92 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+body, html {
+    height: 100%;
+}
+.head {
+    /* The image used */
+    background-image: url("http://cdn.smartbets.com/contents/shared/team_headers/team_header-3.jpg");
+
+    /* Full height */
+    height: 25%;
+    font-family: 'Oswald', sans-serif !important;
+
+    /* Center and scale the image nicely */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+  background-image: url('http://2.bp.blogspot.com/-a8w0gO0TC-s/T9C7nS5HjNI/AAAAAAAAB-E/gDImtBA2Cpk/s1600/brown_web_site_background_image.jpg');
+  background-repeat-x: inherit;
+  font-family: 'Oswald', sans-serif !important;
+}
+
+* {
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 13px;
+}
+
+h1 {
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Oswald', sans-serif !important;
+}
+
+.active a {
+  background-color: #E30022 !important;
+}
+
+table {
+  background-color: white;
+  table-layout: fixed;
+}
+
+.table td {
+   text-align: center;
+}
+
+th {
+  text-align: center;
+  height: 10%;
+}
+
+.navbar {
+ min-height: 20px;
+}
+
+.navbar li {
+  font-size: 20px;
+  font-family: 'Oswald', sans-serif !important;
+}
+
+.control-group.error { 
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  text-shadow: 1px 1px black; 
+  font-size: 14px;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  color: red;
+ height: 20px;
+}
+.navbar-brand a {
+  color: red;
+}
+
+.podbar {
+    text-align: left !important;
+    vertical-align: middle;
+    bottom:0;
+    position:fixed;
+    z-index:150;
+    _position:absolute;
+    _top:expression(eval(document.documentElement.scrollTop+
+        (document.documentElement.clientHeight-this.offsetHeight)));
+    height:20px;
+    width:100%;
+}
