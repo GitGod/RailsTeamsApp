@@ -4,8 +4,6 @@
 ### Opis
 Aplikacja CRUD katalogu z druzyn i zawodnikow, napisana w technologii [Ruby on Rails](http://rubyonrails.org/).
 
-## Projekt zaliczeniowy - Architektura serwisów internetowych 2018
-
 ### Założenia techniczne
 | Wersja Ruby | Wersja Rails |
 :--:|:--:
