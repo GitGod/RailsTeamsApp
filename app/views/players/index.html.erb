@@ -1,47 +1,46 @@
-<%- model_class = Player -%>
-<%= link_to t('Add new player'),
-            new_player_path,
-            class: 'btn btn-warning' %>
+<div class="album py-5">
+  <div class="container">
 
-<div class="dbtable">
-  <table class="table table-hover table-bordered">
-  <thead align="center">
-    <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:surname) %></th>
-      <th><%= model_class.human_attribute_name(:born) %></th>
-      <th><%= model_class.human_attribute_name(:country) %></th>
-      <th><%= model_class.human_attribute_name(:position) %></th>
-      <th width="20%"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @players.each do |player| %>
-      <tr>
-          <td style="text-align: center; vertical-align: middle;"><%= player.name %></td>
-          <td style="text-align: center; vertical-align: middle;"><%= player.surname %></td>
-          <td style="text-align: center; vertical-align: middle;"><%= player.born %></td>
-          <td style="text-align: center; vertical-align: middle;"><%= player.country_name %></td>
-          <td style="text-align: center; vertical-align: middle;"><%= player.position %></td>
-        <td style="text-align: center; vertical-align: middle;">
-          <%= link_to 'Show', player_path(player), class: 'btn btn-info', title: "#{ t('.show', default: t('helpers.links.show')) }" %>
-          <%= link_to 'Edit', edit_player_path(player), class: 'btn btn-info', title: "#{ t('.edit', default: t('helpers.links.edit')) }" %>
-          <%= link_to 'Delete', player_path(player), class: 'btn btn-warning', method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, title: "#{ t('.destroy', default: t('helpers.links.destroy')) }" %>
-        </td>
-      </tr>
+    <% if notice %>
+      <p id="notice" class="alert alert-success"><%= notice %></p>
     <% end %>
-  </tbody>
-  </table>
-  <div class="col-xs-2" align="center" style="
-  width: 300px;
-  height: 200px;
-  z-index: 15;
-  top: 10%;
-  left: 40%;
-  margin: auto;">
-  <%= form_tag(players_path, method: :get) do %>
-    <%= text_field_tag :term, "", :class => "form-control input-sm" %>
-    <%= submit_tag("Search!", :class => "btn btn-standard", name: nil ) %>
-  <% end %>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <%= link_to 'Add player', new_player_path, { :class=>"btn btn-primary" } %>
+
+      <div class="text-nowrap pl-3 view-opt d-flex">
+        <% if @display == 'table' %>
+          <%= link_to material_icon.view_module.md_24, players_path(:q => @search, :d => "grid"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
+          <%= material_icon.view_list.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
+        <% else %>
+          <%= material_icon.view_module.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
+          <%= link_to material_icon.view_list.md_24, players_path(:q => @search, :d => "table"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
+        <% end %>
+        <%= form_tag(players_path, method: :get) do %>
+          <div class="input-group d-flex">
+            <%= text_field_tag :q, params[:q], class: "form-control" %>
+            <div class="input-group-append search-opt">
+              <%= button_tag(type: 'submit', name: nil, class: "btn btn-primary") do %>
+                <%= material_icon.search %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @display == 'table' %>
+      <%= render 'table', player: @player %>
+    <% else %>
+      <%= render 'grid', player: @player %>
+    <% end %>
+
+    <% if @players.first.nil? %>
+      <div class="alert alert-secondary" role="alert">
+      No results...
+      </div>
+    <% end %>
+
+
   </div>
 </div>

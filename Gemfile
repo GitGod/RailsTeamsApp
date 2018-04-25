@@ -5,8 +5,6 @@ ruby '2.5.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0.rc1'
-# Use CarrierWave as picture uploader
-gem 'carrierwave'
 # Easy validate files and dates
 gem 'file_validators'
 gem 'validates_timeliness'
@@ -39,6 +37,22 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Bootstrap stuff
+gem 'bootstrap', '~> 4.0.0'
+gem 'jquery-rails'
+
+# Country selector for dropdown countries list
+gem 'country_select'
+
+# Upload images
+gem "paperclip", "~> 5.2.1"
+
+# Render image placeholders
+gem 'holder_rails'
+
+# Material Design Icons
+gem 'material_icons'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -68,10 +82,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# Make all the necessary Bootstrap files available to the current application
-gem 'bootstrap-sass', '3.3.7'
-gem 'bootstrap-sass-extras', '0.0.7'
-
-# Country selector for dropdown countries list
-gem 'country_select'

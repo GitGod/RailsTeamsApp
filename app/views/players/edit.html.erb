@@ -1,2 +1,8 @@
-<%- model_class = Player -%>
-<%= render partial: 'form' %>
+<div class="row">
+  <div class="col-md-6 py-5 mx-auto">
+    <%= link_to "Show", @player, class: "btn btn-outline-info float-right" %>
+    <h4 class="mb-3">Edit player</h4>
+
+    <%= render 'form', player: @player %>
+  </div>
+</div>

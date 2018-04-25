@@ -1,46 +1,73 @@
-<%= form_for @player, html: { class: 'form-horizontal' } do |f| %>
-  <div class="form-group">
-    <%= f.label :picture, class: 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.file_field :picture, class: 'text_field form-control' %>
+<%= form_with(model: player, local: true, multipart: true) do |form| %>
+  <% if player.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h5><%= pluralize(player.errors.count, "error") %> prohibited this product from being saved:</h5>
+
+      <ul>
+      <% player.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-md-6">
+      <%= form.label :surname %>
+      <%= form.text_field :surname, class: "form-control" %>
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label :name, class: 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :name, class: 'text_field form-control' %>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <%= form.label :born, "Date of Birth" %>
+      <%= form.date_field :born, class: "form-control" %>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :surname, class: 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :surname, class: 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :born, class: 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.date_field :born, class: 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :country, class: 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.country_select :country, class: 'text_field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :position, class: 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.select :position, ['Goalkeeper', 'Left-Backward', 'Central-Backward', 'Right-Backward', 'Left-Midfielder', 'Central-Midfielder', 'Right-Midfielder', 'Striker'] %>
+
+    <div class="form-group col-md-6">
+      <%= form.label :country %>
+      <%= form.country_select :country, {}, { class: "form-control" } %>
     </div>
   </div>
 
   <div class="form-group">
-    <div class='col-md-offset-2 col-md-10'>
-      <%= f.submit nil, class: 'btn btn-primary' %>
-      <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-                  players_path, class: 'btn btn-default' %>
+    <%= form.label :position %>
+    <%= form.select :position, ['Goalkeeper', 'Left-Backward', 'Central-Backward',
+      'Right-Backward', 'Left-Midfielder', 'Central-Midfielder', 'Right-Midfielder', 'Striker'], {}, { class: "form-control" } %>
+  </div>
+
+  <% if @player.image.exists? %>
+    <hr class="mb-4">
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <%= form.label :image, "New image" %>
+        <%= form.file_field :image, class: "form-control-file" %>
+        <small class="form-text text-muted">File not bigger than 1MB.</small>
+      </div>
+
+      <div class="form-group col-md-6">
+        <p>Current image</p>
+        <%= image_tag(player.image.url(:thumb), class: "img-fluid border rounded") %>
+      </div>
     </div>
+  <% else %>
+    <div class="form-group">
+      <%= form.label :image %>
+      <span class="text-muted">(Optional)</span>
+      <%= form.file_field :image, class: "form-control-file" %>
+      <small class="form-text text-muted">File not bigger than 1MB.</small>
+    </div>
+  <% end %>
+
+  <hr class="mb-4">
+
+  <div class="actions">
+    <%= form.submit 'Submit', class: "btn btn-primary btn-lg btn-block" %>
   </div>
 <% end %>

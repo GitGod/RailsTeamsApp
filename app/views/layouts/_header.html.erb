@@ -1,12 +1,20 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/players">Arsenal</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <%= link_to "RailsTeamsApp", root_path, { :class=>"navbar-brand" } %>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav">
+        <li class="nav-item <%= 'active' if params[:controller] == 'players' %>">
+          <%= link_to 'Players', players_path, { :class=>"nav-link" } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Teams', '#', { :class=>"nav-link" } %>
+        </li>
+      </div>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="<%= 'active' if params[:controller] == 'players' %>"><a href="/players">PLAYERS</a></li>
-      <li class="<%= 'active' if params[:controller] == 'pages' %>"><a href="/pages/info">ABOUT</a></li>
-    </ul>
-    <a href="https://www.arsenal.com/"><button class="btn btn-danger navbar-btn" style="float: right;">Arsenal.com - Official Page</button></a>
+
   </div>
 </nav>

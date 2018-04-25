@@ -1,30 +1,38 @@
-<%- model_class = Player -%>
-  <h1><%=t '.title', default: @player.name + " " + @player.surname %></h1>
+<div class="py-5">
 
-<div class="fieldset">
-<div style="text-align: center;"><%= image_tag(@player.picture_url, width:200) if @player.picture.present? %></div>
-  <dl>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
-      <dd><pre class="prettyprint"><%= @player.name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:surname) %></dt>
-      <dd><pre class="prettyprint"><%= @player.surname %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:born) %></dt>
-      <dd><pre class="prettyprint"><%= @player.born %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:country) %></dt>
-      <dd><pre class="prettyprint"><%= @player.country_name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:position) %></dt>
-      <dd><pre class="prettyprint"><%= @player.position %></pre></dd>
-  </dl>
-</div>
+  <% if notice %>
+    <p id="notice" class="alert alert-success"><%= notice %></p>
+  <% end %>
 
-<div class="form-group">
-  <%= link_to t('.back', default: t("helpers.links.back")),
-              players_path, class: 'btn btn-default'  %>
-  <%= link_to t('.edit', default: t("helpers.links.edit")),
-              edit_player_path(@player), class: 'btn btn-default' %>
-  <%= link_to t('.destroy', default: t("helpers.links.destroy")),
-              player_path(@player),
-              method: 'delete',
-              data: { confirm: "Are you sure?" },
-              class: 'btn btn-danger' %>
+  <div class="row">
+
+   <div class="col-md-6 mb-5">
+     <% if @player.image.exists? %>
+       <%= image_tag @player.image.url(:large), class: "img-fluid border rounded" %>
+     <% else %>
+       <%= holder_tag '600x600', @player.name, 'sky', { class: 'img-fluid border rounded' }, { auto: 'yes' } %>
+     <% end %>
+   </div>
+   <div class="col-md-6">
+     <h2><%= @player.name + " " + @player.surname %></h2>
+     <table class="table table-hover">
+       <tbody>
+         <tr>
+           <th scope="row">Date of Birth</th>
+           <td class="text-right"><%= @player.born %></td>
+         </tr>
+         <tr>
+           <th scope="row">Country</th>
+           <td class="text-right"><%= @player.country_name %></td>
+         </tr>
+         <tr>
+           <th scope="row">Position</th>
+           <td class="text-right"><%= @player.position %></td>
+         </tr>
+       </tbody>
+     </table>
+     <%= link_to "Edit", edit_player_path(@player), class: "btn btn-outline-primary" %>
+     <%= link_to 'Delete', @player, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+   </div>
+  </div>
 </div>

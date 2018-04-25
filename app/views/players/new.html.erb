@@ -1,2 +1,7 @@
-<%- model_class = Player -%>
-<%= render partial: 'form' %>
+<div class="row">
+  <div class="col-md-6 py-5 mx-auto">
+    <h4 class="mb-3">Add new player</h4>
+
+    <%= render 'form', player: @player %>
+  </div>
+</div>
