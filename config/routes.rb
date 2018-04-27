@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :leagues
+  resources :teams
   get 'pages/info'
   resources :players
   root 'pages#info'

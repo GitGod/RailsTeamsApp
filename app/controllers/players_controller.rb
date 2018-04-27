@@ -17,16 +17,19 @@ class PlayersController < ApplicationController
   # GET /players/new
   def new
     @player = Player.new
+    @teams = Team.all.order(:name)
   end
 
   # GET /players/1/edit
   def edit
+    @teams = Team.all.order(:name)
   end
 
   # POST /players
   # POST /players.json
   def create
     @player = Player.new(player_params)
+    @teams = Team.all.order(:name)
 
     respond_to do |format|
       if @player.save
@@ -42,6 +45,7 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1
   # PATCH/PUT /players/1.json
   def update
+    @teams = Team.all.order(:name)
     respond_to do |format|
       if @player.update(player_params)
         format.html { redirect_to @player, notice: 'Player was successfully updated.' }
@@ -71,7 +75,7 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:name, :surname, :born, :country, :position, :image, :q, :d)
+      params.require(:player).permit(:name, :team_id, :surname, :born, :country, :position, :image, :q, :d)
     end
 
 end

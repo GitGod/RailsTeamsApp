@@ -1,0 +1,56 @@
+<%= form_with(model: league, local: true) do |form| %>
+  <% if league.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(league.errors.count, "error") %> prohibited this league from being saved:</h2>
+
+      <ul>
+      <% league.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.country_select :country, {}, { class: "form-control" } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :website %>
+    <%= form.text_field :website %>
+  </div>
+
+     <% if @league.logo.exists? %>
+    <hr class="mb-4">
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <%= form.label :logo, "New logo" %>
+        <%= form.file_field :logo, class: "form-control-file" %>
+        <small class="form-text text-muted">File not bigger than 1MB.</small>
+      </div>
+
+      <div class="form-group col-md-6">
+        <p>Current logo</p>
+        <%= image_tag(league.logo.url(:thumb), class: "img-fluid border rounded") %>
+      </div>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <%= form.label :logo %>
+      <span class="text-muted">(Optional)</span>
+      <%= form.file_field :logo, class: "form-control-file" %>
+      <small class="form-text text-muted">File not bigger than 1MB.</small>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

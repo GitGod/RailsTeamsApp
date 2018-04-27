@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_25_214617) do
+ActiveRecord::Schema.define(version: 2018_04_27_094955) do
+
+  create_table "leagues", force: :cascade do |t|
+    t.string "name"
+    t.string "country"
+    t.string "website"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "logo_file_name"
+    t.string "logo_content_type"
+    t.integer "logo_file_size"
+    t.datetime "logo_updated_at"
+  end
 
   create_table "players", force: :cascade do |t|
     t.string "name"
@@ -18,12 +30,25 @@ ActiveRecord::Schema.define(version: 2018_04_25_214617) do
     t.date "born"
     t.string "country"
     t.string "position"
+    t.integer "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.date "founded"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "logo_file_name"
+    t.string "logo_content_type"
+    t.integer "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
 end

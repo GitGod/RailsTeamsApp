@@ -41,6 +41,11 @@
       'Right-Backward', 'Left-Midfielder', 'Central-Midfielder', 'Right-Midfielder', 'Striker'], {}, { class: "form-control" } %>
   </div>
 
+    <div class="form-group">
+    <%= form.label :team_id %>
+    <%= form.collection_select :team_id, @teams, :id, :name, {:include_blank => true}, {class: "form-control"} %>
+  </div>
+
   <% if @player.image.exists? %>
     <hr class="mb-4">
 

@@ -1,4 +1,5 @@
 class Player < ApplicationRecord
+	belongs_to :team, optional: true
 	validates :name, :surname, :born, presence: true
 	validates :name, :surname, length: { minimum: 2 }
 	validates_date :born, :before => lambda { 15.years.ago },

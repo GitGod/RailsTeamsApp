@@ -10,8 +10,11 @@
         <li class="nav-item <%= 'active' if params[:controller] == 'players' %>">
           <%= link_to 'Players', players_path, { :class=>"nav-link" } %>
         </li>
-        <li class="nav-item">
-          <%= link_to 'Teams', '#', { :class=>"nav-link" } %>
+        <li class="nav-item <%= 'active' if params[:controller] == 'teams' %>">
+          <%= link_to 'Teams', teams_path, { :class=>"nav-link" } %>
+        </li>
+        <li class="nav-item <%= 'active' if params[:controller] == 'leagues' %>">
+          <%= link_to 'Leagues', leagues_path, { :class=>"nav-link" } %>
         </li>
       </div>
     </div>
