@@ -23,10 +23,27 @@
          </tr>
          <tr>
            <th scope="row">Founded</th>
-           <td class="text-right"><%= @team.founded %></td>
+           <td class="text-right"><%= @team.year %></td>
+         </tr>
+         <tr>
+           <th scope="row">Members count</th>
+           <td class="text-right"><%= @team.member_count %></td>
          </tr>
        </tbody>
      </table>
+
+     <h4 class="pr-2">Team members</h4>
+     <table class="table table-hover">
+       <tbody>
+         <% @players.each do |player| %>
+          <tr>
+              <td ><%= link_to player.fullname, player %></td>
+              <td class="text-right"></td>
+          </tr>
+         <% end %>
+       </tbody>
+     </table>
+
      <%= link_to "Edit", edit_team_path(@team), class: "btn btn-outline-primary" %>
      <%= link_to 'Delete', @team, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
    </div>

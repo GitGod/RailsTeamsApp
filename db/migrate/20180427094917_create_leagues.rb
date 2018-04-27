@@ -4,7 +4,6 @@ class CreateLeagues < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :country
       t.string :website
-      t.integer :league_id
 
       t.timestamps
     end

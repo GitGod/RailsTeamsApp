@@ -5,11 +5,11 @@
       <% if player.image.exists? %>
         <%= image_tag(player.image.url(:large), class: "card-img-top") %>
       <% else %>
-        <%= holder_tag '600x600', player.name + " " + player.surname, 'sky', { class: 'card-img-top' }, { auto: 'yes' } %>
+        <%= holder_tag '600x600', player.fullname, 'sky', { class: 'card-img-top' }, { auto: 'yes' } %>
       <% end %>
 
       <div class="card-body">
-        <h4><%= link_to player.name + " " + player.surname, player, class: "text-dark" %></h4>
+        <h4><%= link_to player.fullname, player, class: "text-dark" %></h4>
         <p class="card-text text-muted"><%= player.position %></p>
         <div class="d-flex justify-content-between align-items-center">
           <div>

@@ -1,28 +1,18 @@
 <table class="table bg-white">
   <thead class="thead-light">
     <tr>
-      <th scope="col">Image</th>
       <th scope="col">Name</th>
-      <th scope="col">Surname</th>
-      <th scope="col">Birthdate</th>
       <th scope="col">Position</th>
+      <th scope="col">Team</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @players.each do |player| %>
     <tr>
-      <th>
-        <% if player.image.exists? %>
-          <%= image_tag(player.image.url(:thumb), class: "border") %>
-        <% else %>
-          <%= holder_tag '150x150', player.name + " " + player.surname, 'sky', { class: 'border' }, { auto: 'yes' } %>
-        <% end %>
-      </th>
-      <td><%= player.name %></td>
-      <td><%= player.surname %></td>
-      <td><%= player.born %></td>
+      <td><%= player.fullname %></td>
       <td><%= player.position %></td>
+      <td><%= link_to player.team_name, player.team, class: "text-dark" %></td>
       <td>
         <%= link_to 'Show', player, class: "btn btn-sm btn-outline-info" %>
         <%= link_to 'Edit', edit_player_path(player), class: "btn btn-sm btn-outline-primary" %>

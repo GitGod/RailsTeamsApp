@@ -1,10 +1,10 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :set_player, only: [:show, :edit, :update, :destroy, :remove]
 
   # GET /players
   # GET /players.json
   def index
-    @players = Player.search(params[:q])
+    @players = Player.search(params[:q]).page(params[:page]).per(3)
     @search = params[:q]
     @display = params[:d]
   end
@@ -30,7 +30,6 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
     @teams = Team.all.order(:name)
-
     respond_to do |format|
       if @player.save
         format.html { redirect_to @player, notice: 'Player was successfully created.' }

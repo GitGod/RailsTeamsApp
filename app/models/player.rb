@@ -15,6 +15,18 @@ class Player < ApplicationRecord
  		ISO3166::Country[country]
  	end
 
+	def fullname
+		"#{name} #{surname}"
+	end
+
+	def team_name
+		if self.team
+			self.team.name
+		else
+			"-"
+		end
+	end
+
 	def self.search(term)
   		if term
     		where('name LIKE ? OR surname LIKE ?', "%#{term}%", "%#{term}%")

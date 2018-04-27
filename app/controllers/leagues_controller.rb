@@ -4,7 +4,9 @@ class LeaguesController < ApplicationController
   # GET /leagues
   # GET /leagues.json
   def index
-    @leagues = League.all
+    @leagues = League.search(params[:q]).page(params[:page]).per(3)
+    @search = params[:q]
+    @display = params[:d]
   end
 
   # GET /leagues/1
@@ -69,6 +71,6 @@ class LeaguesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def league_params
-      params.require(:league).permit(:name, :country, :website, :logo)
+      params.require(:league).permit(:name, :country, :website, :logo, :q, :d)
     end
 end

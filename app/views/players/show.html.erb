@@ -29,9 +29,12 @@
            <th scope="row">Position</th>
            <td class="text-right"><%= @player.position %></td>
          </tr>
+         <% if @player.team %>
          <tr>
-          <th scope="row">Club</th>
-          <td class="text-right"><%= teams.find(@player.team_id) %></td>
+            <th scope="row">Club</th>
+            <td class="text-right"><%= @player.team.name %></td>
+          </tr>
+          <% end %>
        </tbody>
      </table>
      <%= link_to "Edit", edit_player_path(@player), class: "btn btn-outline-primary" %>

@@ -4,12 +4,15 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = Team.search(params[:q]).page(params[:page]).per(3)
+    @search = params[:q]
+    @display = params[:d]
   end
 
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @players = Player.where(team: @team)
   end
 
   # GET /teams/new
@@ -72,6 +75,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :city, :founded, :league_id, :logo)
+      params.require(:team).permit(:name, :city, :founded, :league_id, :logo, :q, :d)
     end
 end

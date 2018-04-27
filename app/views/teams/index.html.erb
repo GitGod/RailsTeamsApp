@@ -5,19 +5,24 @@
       <p id="notice" class="alert alert-success"><%= notice %></p>
     <% end %>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <%= link_to 'Add team', new_team_path, { :class=>"btn btn-primary" } %>
+    <div class="d-flex flex-wrap flex-column flex-sm-row justify-content-between mb-4">
+      <%= link_to 'Add team', new_team_path, { :class=>"btn btn-primary mb-2 mb-sm-0" } %>
 
-      <div class="text-nowrap pl-3 view-opt d-flex">
-        <% if @display == 'table' %>
-          <%= link_to material_icon.view_module.md_24, teams_path(:q => @search, :d => "grid"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
-          <%= material_icon.view_list.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
-        <% else %>
-          <%= material_icon.view_module.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
-          <%= link_to material_icon.view_list.md_24, players_path(:q => @search, :d => "table"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
-        <% end %>
+      <div class="text-nowrap view-opt d-flex justify-content-between">
+        <div class="view-group">
+          <% if @display == 'table' %>
+            <%= link_to material_icon.view_module.md_24, teams_path(:q => @search, :d => "grid"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
+            <%= material_icon.view_list.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
+          <% else %>
+            <%= material_icon.view_module.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
+            <%= link_to material_icon.view_list.md_24, teams_path(:q => @search, :d => "table"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
+          <% end %>
+        </div>
         <%= form_tag(teams_path, method: :get) do %>
           <div class="input-group d-flex">
+            <% if params[:d] %>
+              <%= hidden_field_tag :d, params[:d] %>
+            <% end %>
             <%= text_field_tag :q, params[:q], class: "form-control" %>
             <div class="input-group-append search-opt">
               <%= button_tag(type: 'submit', name: nil, class: "btn btn-primary") do %>
@@ -41,6 +46,7 @@
       </div>
     <% end %>
 
+    <%= paginate @teams %>
 
   </div>
 </div>

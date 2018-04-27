@@ -1,31 +1,52 @@
-<p id="notice"><%= notice %></p>
+<div class="album py-5">
+  <div class="container">
 
-<h1>Leagues</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Country</th>
-      <th>Website</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @leagues.each do |league| %>
-      <tr>
-        <td><%= league.name %></td>
-        <td><%= league.country %></td>
-        <td><%= league.website %></td>
-        <td><%= link_to 'Show', league %></td>
-        <td><%= link_to 'Edit', edit_league_path(league) %></td>
-        <td><%= link_to 'Destroy', league, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% if notice %>
+      <p id="notice" class="alert alert-success"><%= notice %></p>
     <% end %>
-  </tbody>
-</table>
 
-<br>
+    <div class="d-flex flex-wrap flex-column flex-sm-row justify-content-between mb-4">
+      <%= link_to 'Add league', new_league_path, { :class=>"btn btn-primary mb-2 mb-sm-0" } %>
 
-<%= link_to 'New League', new_league_path %>
+      <div class="text-nowrap view-opt d-flex justify-content-between">
+        <div class="view-group">
+          <% if @display == 'table' %>
+            <%= link_to material_icon.view_module.md_24, leagues_path(:q => @search, :d => "grid"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
+            <%= material_icon.view_list.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
+          <% else %>
+            <%= material_icon.view_module.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
+            <%= link_to material_icon.view_list.md_24, leagues_path(:q => @search, :d => "table"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
+          <% end %>
+        </div>
+        <%= form_tag(leagues_path, method: :get) do %>
+          <div class="input-group d-flex">
+            <% if params[:d] %>
+              <%= hidden_field_tag :d, params[:d] %>
+            <% end %>
+            <%= text_field_tag :q, params[:q], class: "form-control" %>
+            <div class="input-group-append search-opt">
+              <%= button_tag(type: 'submit', name: nil, class: "btn btn-primary") do %>
+                <%= material_icon.search %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @display == 'table' %>
+      <%= render 'table', team: @team %>
+    <% else %>
+      <%= render 'grid', team: @team %>
+    <% end %>
+
+    <% if @leagues.first.nil? %>
+      <div class="alert alert-secondary" role="alert">
+      No results...
+      </div>
+    <% end %>
+
+    <%= paginate @leagues %>
+
+  </div>
+</div>

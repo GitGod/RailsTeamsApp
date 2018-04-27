@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2018_04_27_094955) do
     t.string "name"
     t.string "city"
     t.date "founded"
+    t.integer "league_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "logo_file_name"
