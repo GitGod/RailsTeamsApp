@@ -10,4 +10,10 @@ Aplikacja CRUD katalogu z druzyn i zawodnikow, napisana w technologii [Ruby on R
 | >=2.5.0  |  >=5.2.0.rc1 |
 
 ### Istotne gemy dla projektu
-W budowie...
+- [bootstrap](https://github.com/twbs/bootstrap-rubygem) - Responsywny wygląd aplikacji
+- [paperclip](https://github.com/thoughtbot/paperclip) - Mozliwość dodawania obrazów do produktów
+- [holder_rails](https://github.com/NARKOZ/holder_rails) - Generowanie zastępczej grafiki dla produktu bez obrazka
+- [material_icons](https://github.com/Angelmmiguel/material_icons) - Ikonki do nawigacji
+- [kaminari](https://github.com/kaminari/kaminari) - Paginacja
+- [country_select](https://github.com/stefanpenner/country_select) - Lista krajów używająca standard ISO 3166-1
+- [validates_timeliness](https://github.com/adzap/validates_timeliness) - Walidator dat
