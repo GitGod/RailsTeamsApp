@@ -1,10 +1,13 @@
 class LeaguesController < ApplicationController
   before_action :set_league, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /leagues
   # GET /leagues.json
   def index
-    @leagues = League.search(params[:q]).page(params[:page]).per(3)
+    @leagues = League.search(params[:q])
+      .order(sort_column + " " + sort_direction)
+      .page(params[:page]).per(3)
     @search = params[:q]
     @display = params[:d]
   end
@@ -73,4 +76,13 @@ class LeaguesController < ApplicationController
     def league_params
       params.require(:league).permit(:name, :country, :website, :logo, :q, :d)
     end
+
+    def sort_column
+      Player.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
 end

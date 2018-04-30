@@ -1,10 +1,13 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy, :remove]
+  helper_method :sort_column, :sort_direction
 
   # GET /players
   # GET /players.json
   def index
-    @players = Player.search(params[:q]).page(params[:page]).per(3)
+    @players = Player.search(params[:q])
+      .order(sort_column + " " + sort_direction)
+      .page(params[:page]).per(3)
     @search = params[:q]
     @display = params[:d]
   end
@@ -75,6 +78,14 @@ class PlayersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
       params.require(:player).permit(:name, :team_id, :surname, :born, :country, :position, :image, :q, :d)
+    end
+
+    def sort_column
+      Player.column_names.include?(params[:sort]) ? params[:sort] : "surname"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
 end

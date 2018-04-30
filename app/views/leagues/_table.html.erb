@@ -1,0 +1,22 @@
+<table class="table bg-white">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col"><%= sortable "name" %></th>
+      <th scope="col"><%= sortable "country" %></th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @leagues.each do |league| %>
+    <tr>
+      <td><%= league.name %></td>
+      <td><%= league.country %></td>
+      <td>
+        <%= link_to 'Show', league, class: "btn btn-sm btn-outline-info" %>
+        <%= link_to 'Edit', edit_league_path(league), class: "btn btn-sm btn-outline-primary" %>
+        <%= link_to 'Delete', league, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-outline-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

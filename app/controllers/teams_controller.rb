@@ -1,10 +1,13 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.search(params[:q]).page(params[:page]).per(3)
+    @teams = Team.search(params[:q])
+      .order(sort_column + " " + sort_direction)
+      .page(params[:page]).per(3)
     @search = params[:q]
     @display = params[:d]
   end
@@ -77,4 +80,13 @@ class TeamsController < ApplicationController
     def team_params
       params.require(:team).permit(:name, :city, :founded, :league_id, :logo, :q, :d)
     end
+
+    def sort_column
+      Player.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
 end

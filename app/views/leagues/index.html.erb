@@ -10,12 +10,12 @@
 
       <div class="text-nowrap view-opt d-flex justify-content-between">
         <div class="view-group">
-          <% if @display == 'table' %>
-            <%= link_to material_icon.view_module.md_24, leagues_path(:q => @search, :d => "grid"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
-            <%= material_icon.view_list.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
-          <% else %>
+          <% if @display == 'grid' %>
             <%= material_icon.view_module.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
             <%= link_to material_icon.view_list.md_24, leagues_path(:q => @search, :d => "table"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
+          <% else %>
+            <%= link_to material_icon.view_module.md_24, leagues_path(:q => @search, :d => "grid"), class: "btn btn-sm btn-light mr-2 rounded text-muted" %>
+            <%= material_icon.view_list.md_24.css_class('btn btn-sm btn-light mr-2 rounded active text-muted') %>
           <% end %>
         </div>
         <%= form_tag(leagues_path, method: :get) do %>
@@ -34,10 +34,10 @@
       </div>
     </div>
 
-    <% if @display == 'table' %>
-      <%= render 'table', team: @team %>
-    <% else %>
+    <% if @display == 'grid' %>
       <%= render 'grid', team: @team %>
+    <% else %>
+      <%= render 'table', team: @team %>
     <% end %>
 
     <% if @leagues.first.nil? %>

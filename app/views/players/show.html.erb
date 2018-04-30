@@ -32,7 +32,7 @@
          <% if @player.team %>
          <tr>
             <th scope="row">Club</th>
-            <td class="text-right"><%= @player.team.name %></td>
+            <td class="text-right"><%= link_to @player.team_name, @player.team %></td>
           </tr>
           <% end %>
        </tbody>

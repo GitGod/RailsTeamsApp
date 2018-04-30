@@ -1,19 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="py-5">
 
-<p>
-  <strong>Name:</strong>
-  <%= @league.name %>
-</p>
+  <% if notice %>
+    <p id="notice" class="alert alert-success"><%= notice %></p>
+  <% end %>
 
-<p>
-  <strong>Country:</strong>
-  <%= @league.country %>
-</p>
+  <div class="row">
 
-<p>
-  <strong>Website:</strong>
-  <%= @league.website %>
-</p>
-
-<%= link_to 'Edit', edit_league_path(@league) %> |
-<%= link_to 'Back', leagues_path %>
+    <div class="col-md-6 mb-5">
+      <% if @league.logo.exists? %>
+        <%= image_tag @league.logo.url(:large), class: "img-fluid border rounded" %>
+      <% else %>
+        <%= holder_tag '600x600', @league.name, 'sky', { class: 'img-fluid border rounded' }, { auto: 'yes' } %>
+      <% end %>
+    </div>
+   <div class="col-md-6">
+     <h2><%= @league.name %></h2>
+     <table class="table table-hover">
+       <tbody>
+         <tr>
+           <th scope="row">Country</th>
+           <td class="text-right"><%= @league.country %></td>
+         </tr>
+         <tr>
+           <th scope="row">Website</th>
+           <td class="text-right"><%= @league.website %></td>
+         </tr>
+         <tr>
+           <th scope="row">Teams count</th>
+           <td class="text-right"><%= @league.team_count %></td>
+         </tr>
+       </tbody>
+     </table>
+     <%= link_to "Edit", edit_league_path(@league), class: "btn btn-outline-primary" %>
+     <%= link_to 'Delete', @league, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+   </div>
+  </div>
+</div>

@@ -7,6 +7,10 @@ class League < ApplicationRecord
 	validates_attachment_file_name :logo, matches: [/png\z/, /jpe?g\z/]
 	validates_with AttachmentSizeValidator, attributes: :logo, less_than: 1.megabytes
 
+	def team_count
+		Team.where(league: self).count
+	end
+
 	def self.search(term)
   		if term
     		where('name LIKE ?', "%#{term}%")
