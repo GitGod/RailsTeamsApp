@@ -7,7 +7,7 @@ class PlayersController < ApplicationController
   def index
     @players = Player.search(params[:q])
       .order(sort_column + " " + sort_direction)
-      .page(params[:page]).per(3)
+      .page(params[:page]).per(6)
     @search = params[:q]
     @display = params[:d]
   end
