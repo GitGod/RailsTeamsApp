@@ -1,6 +1,7 @@
 class League < ApplicationRecord
 	has_many :teams, dependent: :delete_all
 	validates :name, :country, presence: true
+	validates :website, :format => URI::regexp(%w(http https))
 
 	has_attached_file :logo, styles: { large: "600x600#", medium: "300x300#", thumb: "150x150#" }, default_url: "/images/:style/missing.png"
 	validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
