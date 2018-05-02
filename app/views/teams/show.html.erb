@@ -42,7 +42,7 @@
          <% @players.each do |player| %>
           <tr>
               <td><%= link_to player.fullname, player %></td>
-              <td class="text-right"></td>
+              <td class="text-right"><%= player.position %></td>
           </tr>
          <% end %>
          <% if @players.first.nil? %>

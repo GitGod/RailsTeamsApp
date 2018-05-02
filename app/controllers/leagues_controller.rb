@@ -78,7 +78,7 @@ class LeaguesController < ApplicationController
     end
 
     def sort_column
-      Player.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      League.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end
 
     def sort_direction

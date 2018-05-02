@@ -5,7 +5,9 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.search(params[:q])
+    @teams = Team
+      .joins(:league)
+      .search(params[:q])
       .order(sort_column + " " + sort_direction)
       .page(params[:page]).per(6)
     @search = params[:q]
@@ -82,7 +84,11 @@ class TeamsController < ApplicationController
     end
 
     def sort_column
-      Player.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      if(params[:sort] == "leagues.name")
+        "'leagues'.'name'"
+      else
+        Team.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      end
     end
 
     def sort_direction
